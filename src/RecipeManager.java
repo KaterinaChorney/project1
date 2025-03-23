@@ -98,7 +98,7 @@ public class RecipeManager {
         try {
             File file = new File(FILE_PATH);
             if (file.exists()) {
-                String json = new String(Files.readAllBytes(Paths.get(FILE_PATH)), StandardCharsets.UTF_8);
+                String json = new String (Files.readAllBytes(Paths.get(FILE_PATH)), StandardCharsets.UTF_8);
                 recipes = gson.fromJson(json, new TypeToken<List<Recipe>>() {}.getType());
                 if (recipes == null) recipes = new ArrayList<>();
             }
