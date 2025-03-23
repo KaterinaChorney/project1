@@ -16,16 +16,7 @@ public class RecipeManager {
     public RecipeManager() {
         loadFromFile();
     }
-    public void addRecipe() {
-        System.out.print("Введіть назву рецепта: ");
-        String name = scanner.nextLine();
-        System.out.print("Введіть інгредієнти: ");
-        String ingredients = scanner.nextLine();
-        System.out.print("Введіть час приготування (хвилини): ");
-        int cookingTime = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Введіть кухню: ");
-        String cuisine = scanner.nextLine();
+    public void addRecipe(String name,String ingredients,int cookingTime,String cuisine) {
         recipes.add(new Recipe(name, ingredients, cookingTime, cuisine));
         saveToFile();
         System.out.println("Рецепт успішно додано!");
@@ -42,9 +33,7 @@ public class RecipeManager {
         }
     }
 
-    public void findRecipe() {
-        System.out.print("Введіть назву рецепта для пошуку: ");
-        String name = scanner.nextLine();
+    public void findRecipe(String name) {
         for (Recipe recipe : recipes) {
             if (recipe.getName().equalsIgnoreCase(name)) {
                 System.out.println(recipe);
@@ -54,13 +43,10 @@ public class RecipeManager {
         System.out.println("Рецепт не знайдено.");
     }
 
-    public void updateRecipe() {
-        System.out.print("Введіть назву рецепта для оновлення: ");
-        String name = scanner.nextLine();
+    public void updateRecipe(String name, String ingredients) {
         for (Recipe recipe : recipes) {
             if (recipe.getName().equalsIgnoreCase(name)) {
-                System.out.print("Введіть нові інгредієнти: ");
-                recipe.setIngredients(scanner.nextLine());
+                recipe.setIngredients(ingredients);
                 saveToFile();
                 System.out.println("Рецепт оновлено!");
                 return;
@@ -69,23 +55,17 @@ public class RecipeManager {
         System.out.println("Рецепт не знайдено.");
     }
 
-    public void deleteRecipe() {
-        System.out.print("Введіть назву рецепта для видалення: ");
-        String name = scanner.nextLine();
+    public void deleteRecipe(String name) {
         recipes.removeIf(recipe -> recipe.getName().equalsIgnoreCase(name));
         saveToFile();
-        System.out.println("Рецепт видалено");
+        System.out.println("Рецепт видалено.");
     }
 
-    public void sortRecipes() {
+    public void sortRecipes(int choice) {
         if (recipes.isEmpty()) {
             System.out.println("Список рецептів порожній.");
             return;
         }
-        System.out.println("Сортувати:\n1. За алфавітом\n2. За часом приготування\n3. За кухнею");
-        System.out.print("Оберіть пункт зі списку: ");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
         switch (choice) {
             case 1:
                 recipes.sort(Comparator.comparing(Recipe::getName));

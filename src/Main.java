@@ -22,22 +22,43 @@ public class Main
             switch (choice)
             {
                 case 1:
-                    recipeManager.addRecipe();
+                    System.out.print("Введіть назву рецепта: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Введіть інгредієнти: ");
+                    String ingredients = scanner.nextLine();
+                    System.out.print("Введіть час приготування (хвилини): ");
+                    int cookingTime = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Введіть кухню: ");
+                    String cuisine = scanner.nextLine();
+                    recipeManager.addRecipe(name,ingredients,cookingTime,cuisine);
                     break;
                 case 2:
-                    recipeManager.findRecipe();
+                    System.out.print("Введіть назву рецепта для пошуку: ");
+                    String searchname = scanner.nextLine();
+                    recipeManager.findRecipe(searchname);
                     break;
                 case 3:
                     recipeManager.viewAllRecipes();
                     break;
                 case 4:
-                    recipeManager.updateRecipe();
+                    System.out.print("Введіть назву рецепта для оновлення: ");
+                    String updatename = scanner.nextLine();
+                    System.out.print("Введіть нові інгредієнти: ");
+                    String newingredients = scanner.nextLine();
+                    recipeManager.updateRecipe(updatename,newingredients);
                     break;
                 case 5:
-                    recipeManager.deleteRecipe();
+                    System.out.print("Введіть назву рецепта для видалення: ");
+                    String deletename = scanner.nextLine();
+                    recipeManager.deleteRecipe(deletename);
                     break;
                 case 6:
-                    recipeManager.sortRecipes();
+                    System.out.println("Сортувати:\n1. За алфавітом\n2. За часом приготування\n3. За кухнею");
+                    System.out.print("Оберіть пункт зі списку: ");
+                    int sortchoice = scanner.nextInt();
+                    scanner.nextLine();
+                    recipeManager.sortRecipes(sortchoice);
                     break;
                 case 7:
                     running = false;
