@@ -1,19 +1,18 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.time.LocalDateTime;
 import java.util.*;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
 public class RecipeManager {
-    private List<Recipe> recipes = new ArrayList<>();
-    private final String FILE_PATH = "recipes.json";
-    Gson gson = new GsonBuilder()
-            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-            .create();
-    private final Scanner scanner = new Scanner(System.in);
-    public RecipeManager() {
+    private List<Recipe> recipes ;
+    private final String FILE_PATH;
+  private final Gson gson;
+    public RecipeManager(String filePath, Gson gson) {
+        this.FILE_PATH = filePath;
+        this.gson = gson;
+        this.recipes = new ArrayList<>();
         loadFromFile();
     }
     public void addRecipe(String name,String ingredients,int cookingTime,String cuisine) {

@@ -1,9 +1,16 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 public class Main
 {
     public static void main(String[] args)
     {
-        RecipeManager recipeManager = new RecipeManager();
+        String filePath = "recipes.json";
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .create();
+        RecipeManager recipeManager = new RecipeManager(filePath, gson);
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         while (running)
